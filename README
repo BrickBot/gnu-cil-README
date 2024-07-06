@@ -1,10 +1,63 @@
-This file contains instructions to install the CIL frontend and the
-CIL backend.
-The backend can be built using Mono tools (preferred) or DotGnu tools.
+This file contains instructions to install the following:
+* The CIL frontend
+* The CIL backend, which can be built using either of two ways
+  - Mono tools (preferred)
+  - DotGnu tools
+
+
+------------
+Introduction
+------------
+
+Information and background regarding the CIL project is available at the following links:
+* Contextual Overview – https://www.mono-project.com/archived/gcc4cil/
+  - Not part of the GNU project, but provides good info
+* GNU GCC CLI Back-End and Front-End – https://gcc.gnu.org/projects/cli.html
+* 2006 Google Summer of Code
+  - Project Description – https://www.mono-project.com/archived/summer2006/#gcc-cil-backend
+  - Project Blog – https://gcc-cil.blogspot.com
+
+
+-------------------------------------------------------------------------------------------
+HOW TO Clone from GNU GCC refs/vendors/* (Using refs/vendors/st/heads/README as an Example)
+-------------------------------------------------------------------------------------------
+
+tree view:
+https://gcc.gnu.org/git/?p=gcc.git;a=tree;h=refs/vendors/st/heads/README;hb=refs/vendors/st/heads/README
+
+commands:
+# List the remote vendor refs
+git ls-remote --refs git://gcc.gnu.org/git/gcc.git refs/vendors/st/\*
+
+# Initialize an empty git repository
+git init
+
+# Add a remote for the GNU GCC repository:  git remote add -t <branch>  <remote name> <repository>
+git remote add -t refs/vendors/st/heads/README gnu-st git://gcc.gnu.org/git/gcc.git
+
+# The .git/config file is created with an improperly-formed fetch entry that must be manually corrected
+# Find the following "remote" section in the file:  [remote "gnu-st"]
+# Look for the following "fetch" entry:  fetch = +refs/heads/refs/vendors/st/heads/README:refs/remotes/gnu-st/refs/vendors/st/heads/README
+# Remove the "refs/heads" prefix
+# The line should instead read as follows:  fetch = +refs/vendors/st/heads/README:refs/remotes/gnu-st/refs/vendors/st/heads/README
+# Save the modified .git/config file
+
+# Fetch from the remote:  git fetch <remote name>
+git fetch gnu-st
+
+# Reset the repository to that commit
+git reset --hard FETCH_HEAD
+
+# Add a remote for our working remote:  git remote add <remote name> <remote URL>
+#  -To make this remote the default, name it "origin"
+git remote add origin https://github.com/BrickBot/gnu-cil-README.git
+
+# Mirror this repository to the working remote:  git push --mirror --force <remote name>
+git push --mirror --force origin
 
 
 -------------------------------------------------------------
-HOW TO Build and Install CIL Backend With Mono-based binutils
+HOW TO Build and Install CIL Backend with Mono-based binutils
 -------------------------------------------------------------
 
 dependencies:
@@ -64,7 +117,7 @@ path to your LD_LIBRARY_PATH if you plan to use CIL Frontend.
 
 
 ---------------------------------------------------------------
-HOW TO Build and Install CIL Backend With DotGnu-based binutils
+HOW TO Build and Install CIL Backend with DotGnu-based binutils
 ---------------------------------------------------------------
 
 dependencies:
@@ -148,4 +201,3 @@ to link libstd functions with the host libstd.so implementation. Remember to:
  - Add the path to libstd.so (<back end base>/image/lib/<architecture) to LD_LIBRARY_PATH
  - Link with the libstd library:
    $ gcil -lstd ...
-
