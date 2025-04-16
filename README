@@ -5,9 +5,9 @@ This file contains instructions to install the following:
   - DotGnu tools
 
 
-------------
+============
 Introduction
-------------
+============
 
 Information and background regarding the CIL project is available at the following links:
 * Contextual Overview – https://www.mono-project.com/archived/gcc4cil/
@@ -18,13 +18,29 @@ Information and background regarding the CIL project is available at the followi
   - Project Blog – https://gcc-cil.blogspot.com
 
 
--------------------------------------------------------------------------------------------
+===========================================================================================
 HOW TO Clone from GNU GCC refs/vendors/* (Using refs/vendors/st/heads/README as an Example)
--------------------------------------------------------------------------------------------
+===========================================================================================
 
+Viewing
+-------
+“README” Branch
 tree view:
-https://gcc.gnu.org/git/?p=gcc.git;a=tree;h=refs/vendors/st/heads/README;hb=refs/vendors/st/heads/README
+https://gcc.gnu.org/git/?p=gcc.git;a=tree;h=refs/vendors/st/heads/README
 
+shortlog / history view:
+https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/vendors/st/heads/README
+
+“cli-fe” Branch
+tree view:
+https://gcc.gnu.org/git/?p=gcc.git;a=tree;h=refs/vendors/st/heads/cli-fe
+
+shortlog / history view:
+https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/vendors/st/heads/cli-fe
+
+
+Cloning
+-------
 commands:
 # List the remote vendor refs
 git ls-remote --refs git://gcc.gnu.org/git/gcc.git refs/vendors/st/\*
@@ -56,9 +72,9 @@ git remote add origin https://github.com/BrickBot/gnu-cil-README.git
 git push --mirror --force origin
 
 
--------------------------------------------------------------
+=============================================================
 HOW TO Build and Install CIL Backend with Mono-based binutils
--------------------------------------------------------------
+=============================================================
 
 dependencies:
 	- Mono C# compiler mcs or mcs1
@@ -116,9 +132,9 @@ Host libstd implementation is in <...>/image/lib/<architecture>, remember to add
 path to your LD_LIBRARY_PATH if you plan to use CIL Frontend.
 
 
----------------------------------------------------------------
+===============================================================
 HOW TO Build and Install CIL Backend with DotGnu-based binutils
----------------------------------------------------------------
+===============================================================
 
 dependencies:
 	- Mono C# compiler (mcs or mcs1)
@@ -171,9 +187,9 @@ cil32-ilrun
 
 
 
--------------------------------------
+=====================================
 HOW TO Build and Install CIL Frontend
--------------------------------------
+=====================================
 
 dependencies:
 	- libmono with header files from Mono project
